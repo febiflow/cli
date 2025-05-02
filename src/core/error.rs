@@ -12,8 +12,8 @@
 /// problem encountered.
 #[derive(Debug, PartialEq)]
 pub enum ErrorKind {
-  /// Indicates that a required configuration file `ferrum.json` is missing.
-  MissingFerrumConfig,
+  /// Indicates that a required configuration file `.febiflow/config.json` is missing.
+  MissingFebiFlowConfig,
 
   /// An error occured during a file read operation (e.g.,
   /// permission denied, file not found).
