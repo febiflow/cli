@@ -44,11 +44,11 @@ pub trait BuildLambdaBinaryActionProvider {
 ///
 /// This struct encapsulates the functionality needed to build a Rust binary
 /// that can be deployed to AWS Lambda, using the cargo-lambda tool.
-pub struct BuildLambdaBinaryAction {
-  command_util: Rc<dyn CommandUtilProvider>,
+pub struct BuildLambdaBinaryAction<C: CommandUtilProvider> {
+  command_util: Rc<C>,
 }
 
-impl BuildLambdaBinaryAction {
+impl<C: CommandUtilProvider> BuildLambdaBinaryAction<C> {
   /// Creates a new instance with the specified command utility provider.
   ///
   /// # Parameters
@@ -69,12 +69,13 @@ impl BuildLambdaBinaryAction {
   /// let command_util = Rc::new(CommandUtil::new());
   /// let action = BuildLambdaBinaryAction::new(command_util);
   /// ```
-  pub fn new(command_util: Rc<dyn CommandUtilProvider>) -> Self {
+  pub fn new(command_util: Rc<C>) -> Self {
       BuildLambdaBinaryAction { command_util }
   }
 }
 
-impl BuildLambdaBinaryActionProvider for BuildLambdaBinaryAction {
+impl<C: CommandUtilProvider> BuildLambdaBinaryActionProvider
+for BuildLambdaBinaryAction<C> {
   /// Builds the specified binary for AWS Lambda deployment.
   ///
   /// This method uses cargo-lambda to build a release binary with the
