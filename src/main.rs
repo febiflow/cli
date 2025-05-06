@@ -5,6 +5,8 @@ fn handler() -> Result<()> {
 
   if let Some(matches) = matches.subcommand_matches("deploy") {
     cli::commands::handle_deploy(matches)?;
+  } else if let Some(matches) = matches.subcommand_matches("new") {
+    cli::commands::handle_new(matches)?;
   }
 
   Ok(())

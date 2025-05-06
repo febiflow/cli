@@ -12,6 +12,8 @@ use args::{
 pub fn build_cli() -> Command {
   Command::new("febiflow")
     .about("A simple CLI tool for febiflow projects")
+    .subcommand(Command::new("new")
+      .about("Create a new febiflow project"))
     .subcommand(Command::new("deploy")
       .about("Deploy febiflow project using cargo-lambda")
       .arg(build_binary_name_arg())
